@@ -1,0 +1,26 @@
+
+<mat-dialog-content  style="background:rgb(255,255,255);width: 560px;" >
+  <mat-spinner style="margin-left: auto;margin-right: auto" *ngIf="!sel"></mat-spinner>
+  <div *ngIf="sel">
+    <div *ngIf="!_add">
+  <div style="margin-top: 20px;margin-left: 10px" *ngFor="let link of requ[0].procedure;let i=index">
+    <p style="color: black">link{{i+1}}: {{link.split('#')[1]}}
+      <button *ngIf="nb!==i" (click)="nb=i"  style="width: 70px;margin-right: 10px;padding: 10px;"   class="btn btn-info btn-fill">edit</button>
+      <button *ngIf="nb!==i" (click)="delete(i)"  style="width: 70px;margin-right: 10px;padding: 10px;"   class="btn btn-danger btn-fill">Delete</button>
+      <button *ngIf="nb==i" (click)="save(my_input.nativeElement.value,i)" style="width: 70px;margin-right:10px;padding: 10px;"   class="btn btn-secondary btn-fill">save</button>
+      <button *ngIf="nb==i" (click)="nb=-1" style="width: 70px;margin-right: 10px;padding: 10px;"   class="btn btn-danger btn-fill">cancel</button>
+    </p>
+    <a *ngIf="nb!==i"  style="text-decoration: none; margin-bottom: 10px;color: grey " target="_blank" [href]="link">{{link}}</a>
+    <textarea #my_input style="margin-left: 10px;background-color: #e0e0e0" cols="60" rows="3" *ngIf="nb==i" [value]="link"></textarea>
+  </div>
+  <button  (click)="add()" style="width: 70px;margin-left: 230px;padding: 10px;"   class="btn btn-secondary btn-fill">Add</button>
+    </div>
+  </div>
+  <div *ngIf="_add">
+    <textarea #my_input2 style="margin-left: 10px;background-color: #e0e0e0;margin-left: 10px;margin-right: 10px;margin-top: 10px" cols="70" rows="3" ></textarea>
+    <button  (click)="save2()" style="width: 70px;margin-left: 200px;padding: 10px;"   class="btn btn-secondary btn-fill">save</button>
+    <button  (click)="_add=false" style="width: 70px;padding: 10px;"   class="btn btn-danger btn-fill">Cancel</button>
+
+  </div>
+</mat-dialog-content>
+

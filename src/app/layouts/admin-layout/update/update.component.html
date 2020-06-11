@@ -1,0 +1,89 @@
+<div class="content" >
+  <mat-spinner style="margin-left: auto;margin-right: auto" *ngIf="!sel"></mat-spinner>
+  <div *ngIf="sel">
+  <h1 style="margin-right: auto;margin-left: auto">Family</h1>
+  <div class="tbl-header">
+
+    <table class="container" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr >
+        <th width="20%" >family</th>
+        <th width="60%"  >description</th>
+        <th width="20%"  >options</th>
+
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table  style="background-color: grey" cellpadding="0" style="color: black" cellspacing="0" border="0">
+
+
+      <tbody   >
+      <tr *ngFor="let fam of family;let i=index" >
+        <td width="20%" >{{fam.family}}</td>
+        <td width="60%" *ngIf="nb!=i" >{{fam.description}}</td>
+        <td width="60%" *ngIf="nb==i"  ><textarea cols="50" #my_input  type="text" [value]="fam.description" ></textarea></td>
+        <td>
+          <button style="width: 70px;margin-right: 10px;padding: 10px;" *ngIf="nb==i"  (click)="save(fam._id,my_input.nativeElement.value)" class="btn btn-secondary btn-fill">save</button>
+          <button *ngIf="nb!==i" style="width: 70px;margin-right: 10px;padding: 10px;" (click)="nb=i" class="btn btn-info btn-fill">edit</button>
+          <button *ngIf="nb==i" style="width: 70px;margin-right: 10px;padding: 10px;" (click)="nb=-1" class="btn btn-danger btn-fill">cancel</button>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+    <h1 style="margin-top: 5px">{{level._id.family_name}}</h1>
+
+    <div  style="display: flex">
+    <div  style="flex: 1;margin-right: 10px;margin-top: auto;margin-bottom: auto">   <i   (click)="left()" style="color: whitesmoke;cursor: pointer"   class=" fa fa-angle-left fa-5x "></i>
+    </div>
+    <div style="flex: 50">
+      <div class="tbl-header">
+
+        <table class="container" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr >
+            <th width="5%" >ID</th>
+            <th width="19%" >MSTG-ID</th>
+            <th  width=30%>Detailed Verification Requirement</th>
+            <th width="20%" >options</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+
+        <table style="background-color: grey" cellpadding="0" style="color: black" cellspacing="0" border="0">
+
+
+          <tbody  >
+          <tr  *ngFor="let tst of level.requ;let i=index" >
+            <td width="5%">{{level._id.family_rank}}.{{tst.requ_rank}}</td>
+            <td width="19%">MSTG-{{level._id.family_name}}-{{tst.requ_rank}} </td>
+            <td *ngIf="nb2!=i"  width=30%>{{tst.requ_desctiption}}</td>
+            <td width="30%" *ngIf="nb2==i"  ><textarea cols="50" #my_input2  type="text" [value]="tst.requ_desctiption" ></textarea></td>
+
+            <td   width=20%>
+              <button *ngIf="nb2!==i" style="width: 70px;margin-right: 10px;padding: 10px;"  (click)="nb2=i" class="btn btn-info btn-fill">edit</button>
+              <button style="width: 70px;margin-right: 10px;padding: 10px;" *ngIf="nb2==i"  (click)="save2(tst.requ_id,my_input2.nativeElement.value)" class="btn btn-secondary btn-fill">save</button>
+              <button *ngIf="nb2==i" style="width: 70px;margin-right: 10px;padding: 10px;" (click)="nb2=-1" class="btn btn-danger btn-fill">cancel</button>
+              <button  (click)="info(tst.requ_procedure,tst.requ_id)" *ngIf="nb2!==i" style="width: 100px;margin-right: 10px;padding: 10px;" class="btn btn-secondary btn-fill">procedure</button>
+            </td>
+
+
+
+          </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+    <div style="flex: 1;margin-left: 10px;margin-top: auto;margin-bottom: auto">    <i (click)="right()" style="color: white;cursor: pointer"  class="fa fa-angle-right fa-5x "></i>
+    </div>
+
+  </div>
+  </div>
+</div>

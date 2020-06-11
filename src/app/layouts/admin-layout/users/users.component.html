@@ -1,0 +1,137 @@
+<div class="content" style="margin-top: 45px">
+ <div *ngIf="sel1==1">
+   <h1 class="text-center">Users</h1>
+   <ul  class="list-group">
+
+     <!--Navbar-->
+     <li style="background-color: #2c343b;" class="navbar navbar-expand-lg navbar-dark teal lighten-2 mb-4">
+
+       <!-- Navbar brand -->
+       <a class="navbar-brand" >List Of Users</a>
+
+       <!-- Collapsible content -->
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+         <!-- Search form -->
+         <form  class="form-inline ml-auto">
+           <div class="md-form my-0">
+
+             <input style="border-color: white" #my_input   class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+           </div>
+         </form>
+       </div>
+       <!-- Collapsible content -->
+
+     </li>
+     <!--/.Navbar-->
+     <div >
+       <div class="tbl-header">
+
+         <table class="container" cellpadding="0" cellspacing="0" border="0">
+           <thead>
+           <tr>
+             <th width="85%" >email</th>
+             <th></th>
+           </tr>
+           </thead>
+         </table>
+       </div>
+       <div class="tbl-content">
+         <mat-spinner style="margin-left: auto;margin-right: auto" *ngIf="sel==false" ></mat-spinner>
+         <table *ngIf="sel==true&&users.length>=1" style="background-color: grey" cellpadding="0" style="color: black" cellspacing="0" border="0">
+
+
+           <tbody *ngFor="let user of users|filter:my_input.value" >
+           <tr >
+             <td width="85%">{{user.email}}</td>
+
+
+             <td   >
+               <button style="width: 100px;padding: 10px;" (click)="open_user(user._id,user.email)" class="btn btn-info btn-fill ">open</button>
+
+             </td>
+           </tr>
+
+           </tbody>
+
+         </table>
+       </div>
+
+     </div>
+
+   </ul>
+
+ </div>
+  <div *ngIf="sel1==2">
+    <h1 class="text-center">{{name}}</h1>
+    <ul  class="list-group">
+
+      <!--Navbar-->
+      <li style="background-color: #2c343b;" class="navbar navbar-expand-lg navbar-dark teal lighten-2 mb-4">
+
+        <!-- Navbar brand -->
+        <i (click)="back()" style="color: whitesmoke;cursor: pointer;margin-left: 15px" class=" fa fa-angle-left fa-2x "></i>
+        <a style="margin-left: 50px" class="navbar-brand" >List Of Audits</a>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Search form -->
+          <form  class="form-inline ml-auto">
+            <div class="md-form my-0">
+              <select style="color:white;border-color: white;margin-right: 10px;background: rgba(128,128,128,0.04)" name="level" ngModel #level="ngModel" type="text" class="form-control" required>
+                <option style="color: grey;" value="" disabled selected>search by </option>
+                <option style="color: black"  value="title">title</option>
+                <option style="color: black" value="level">level</option>
+                <option style="color: black" value="client name">client name</option>
+
+              </select>
+              <input style="border-color: white" #my_input   class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </li>
+      <!--/.Navbar-->
+      <mat-spinner style="margin-left: auto;margin-right: auto" *ngIf="sel==false" ></mat-spinner>
+      <div *ngIf="sel==true&&audits.length>=1">
+        <div class="tbl-header">
+
+          <table class="container" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+              <th width="25%">title</th>
+              <th width="25%">level</th>
+              <th width="25%">client name</th>
+              <th width="25%">closed</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+
+          <table style="background-color: grey" cellpadding="0" style="color: black" cellspacing="0" border="0">
+
+
+            <tbody *ngFor="let audit of audits|filter2:my_input.value:level.value" >
+            <tr >
+              <td width="25%">{{audit.title}}</td>
+              <td width="25%">{{audit.level}} </td>
+              <td width="25%">{{audit.Client_Name}}</td>
+              <td *ngIf="audit.Closing_Date!==''" width="25%"> <i  class="fa fa-check fa-2x"></i></td>
+              <td *ngIf="audit.Closing_Date==''" width="25%"> <i  class="fa fa-times fa-2x"></i></td>
+
+
+            </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+
+    </ul>
+  </div>
+</div>

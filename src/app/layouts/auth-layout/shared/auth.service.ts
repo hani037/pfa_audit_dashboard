@@ -2,12 +2,13 @@ import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, from, Subject} from 'rxjs';
 import { User } from './user.model';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  baseUrl = environment.baseUrl;
   public user :User;
   public notification =new Subject<boolean>();
   get userIsAuthenticated() {
@@ -46,7 +47,7 @@ export class AuthService {
 
 
   public login(el: string, pass: string) {
-    return this.http.post<{userId: string, token: string, message: string}>('http://localhost:8050/login_admin',
+    return this.http.post<{userId: string, token: string, message: string}>(this.baseUrl+'login_admin',
       {email: el, password: pass});
   }
 
